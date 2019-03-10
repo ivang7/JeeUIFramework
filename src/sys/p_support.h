@@ -87,6 +87,18 @@ void page_support(){
     request->send(response);
   });
 
+  server.on("/js/bootstrap.min.js", HTTP_ANY, [](AsyncWebServerRequest *request) {
+    AsyncWebServerResponse *response = request->beginResponse_P(200, F("application/javascript"), bootstrap_js, bootstrap_js_len);
+    response->addHeader(F("Content-Encoding"), F("gzip"));
+    request->send(response);
+  });
+
+  server.on("/js/jquery-3.2.1.min.js", HTTP_ANY, [](AsyncWebServerRequest *request) {
+    AsyncWebServerResponse *response = request->beginResponse_P(200, F("application/javascript"), jquery_js, jquery_js_len);
+    response->addHeader(F("Content-Encoding"), F("gzip"));
+    request->send(response);
+  });
+  
   server.on("/js/bubbly_bg.js", HTTP_GET, [](AsyncWebServerRequest *request) {
     AsyncWebServerResponse *response = request->beginResponse_P(200, F("application/javascript"), bubbly_bg_js, bubbly_bg_js_len);
     response->addHeader(F("Content-Encoding"), F("gzip"));
